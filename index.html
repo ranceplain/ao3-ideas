@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Idea Graveyard – Amature Writter</title>
+    <style>
+        :root {
+            --bg: #0d0d0d;
+            --text: #e0e0e0;
+            --accent: #ff5e5e;
+            --accent2: #5efff0;
+        }
+        * {
+            box-sizing: border-box;
+        }
+        body {
+            background: var(--bg);
+            color: var(--text);
+            font-family: 'Comic Sans MS', 'Chalkboard SE', 'Comic Neue', cursive, sans-serif;
+            margin: 0;
+            padding: 1rem;
+            transition: all 0.4s;
+            overflow-x: hidden;
+        }
+        body.disco {
+            animation: discoStrobe 0.15s infinite alternate;
+        }
+        @keyframes discoStrobe {
+            0% { background-color: #ff0000; }
+            20% { background-color: #00ff00; }
+            40% { background-color: #0000ff; }
+            60% { background-color: #ffff00; }
+            80% { background-color: #ff00ff; }
+            100% { background-color: #00ffff; }
+        }
+        body.disco .container {
+            animation: jitter 0.1s infinite;
+        }
+        @keyframes jitter {
+            0% { transform: translate(0, 0); }
+            25% { transform: translate(2px, -1px); }
+            50% { transform: translate(-2px, 1px); }
+            75% { transform: translate(-1px, -2px); }
+            100% { transform: translate(1px, 2px); }
+        }
+        body.mgs3 {
+            background: #2b3a1f;
+            background-image: repeating-linear-gradient(45deg, #3a4f2b 0px, #3a4f2b 10px, #2b3a1f 10px, #2b3a1f 20px);
+        }
+        body.gfl {
+            background: #3c2f28;
+            background-image: url('data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22200%22 height=%22200%22%3E%3Crect fill=%22%235c4a3a%22 width=%22200%22 height=%22200%22/%3E%3Ccircle cx=%22100%22 cy=%22100%22 r=%2260%22 fill=%22%23d4a373%22/%3E%3C/svg%3E');
+            color: #f5deb3;
+        }
+        body.skyrim {
+            background: #1c2833;
+            background-image: url('data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22100%22 height=%22100%22%3E%3Ccircle cx=%2220%22 cy=%2220%22 r=%223%22 fill=%22white%22/%3E%3Ccircle cx=%2275%22 cy=%2235%22 r=%224%22 fill=%22white%22/%3E%3Ccircle cx=%2250%22 cy=%2265%22 r=%222%22 fill=%22white%22/%3E%3C/svg%3E');
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+        }
+        h1 {
+            font-size: 2.8rem;
+            text-align: center;
+            color: var(--accent2);
+            text-shadow: 3px 3px 0 #000, -3px -3px 0 #000, 0 0 10px #ff00de;
+            animation: glitch 0.3s infinite, flicker 1.5s infinite;
+            margin-bottom: 0;
+            letter-spacing: 2px;
+        }
+        @keyframes glitch {
+            0% { transform: translate(0); }
+            20% { transform: translate(-2px, 2px); }
+            40% { transform: translate(-2px, -2px); }
+            60% { transform: translate(2px, 2px); }
+            80% { transform: translate(2px, -2px); }
+            100% { transform: translate(0); }
+        }
+        @keyframes flicker {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+        .subtitle {
+            text-align: center;
+            font-size: 1.1rem;
+            color: #ccc;
+            margin-top: 0;
+            font-style: italic;
+        }
+        marquee {
+            font-size: 1.3rem;
+            background: #222;
+            padding: 0.5rem 0;
+            color: var(--accent);
+            margin: 1rem 0;
+            border-top: 2px dashed var(--accent);
+            border-bottom: 2px dashed var(--accent);
+        }
+        .unwritten-counter {
+            text-align: center;
+            font-size: 1.4rem;
+            background: #111;
+            display: inline-block;
+            padding: 0.5rem 1.5rem;
+            border-radius: 30px;
+            margin: 1rem auto;
+            border: 2px solid var(--accent2);
+            box-shadow: 0 0 20px rgba(94, 255, 240, 0.3);
+        }
+        .buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            justify-content: center;
+            margin: 1.5rem 0;
+        }
+        button, .btn {
+            background: #1a1a1a;
+            border: 2px solid var(--accent);
+            color: var(--accent);
+            padding: 0.5rem 1.2rem;
+            font-family: inherit;
+            font-size: 1rem;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: 0.2s;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        button:hover, .btn:hover {
+            background: var(--accent);
+            color: #000;
+            box-shadow: 0 0 20px var(--accent);
+        }
+        .fic-card {
+            background: #1a1a1a;
+            border: 1px solid #333;
+            margin: 1.5rem 0;
+            padding: 1rem;
+            border-radius: 8px;
+            box-shadow: 0 0 15px rgba(0,0,0,0.7);
+            transition: transform 0.2s, border-color 0.2s;
+            position: relative;
+            overflow: hidden;
+        }
+        .fic-card:hover {
+            border-color: var(--accent2);
+            transform: scale(1.01);
+        }
+        .fic-card h2 {
+            margin-top: 0;
+            color: var(--accent2);
+            font-size: 1.8rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .fic-card small {
+            font-size: 0.9rem;
+            color: #aaa;
+            font-weight: normal;
+        }
+        .fic-card summary {
+            cursor: pointer;
+            outline: none;
+            list-style: none;
+            font-weight: bold;
+            color: var(--accent);
+            margin: 0.8rem 0;
+            font-size: 1.1rem;
+        }
+        .fic-card details[open] summary {
+            color: var(--accent2);
+        }
+        .fic-card p {
+            margin: 0.5rem 0;
+            line-height: 1.5;
+        }
+        .hover-spoiler {
+            display: inline-block;
+            background: #000;
+            color: #000;
+            padding: 0 0.3rem;
+            border-radius: 4px;
+            transition: color 0.2s;
+            cursor: default;
+        }
+        .hover-spoiler:hover {
+            color: var(--accent);
+        }
+        footer {
+            margin-top: 3rem;
+            text-align: center;
+            color: #666;
+            font-size: 0.85rem;
+        }
+        a {
+            color: var(--accent2);
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+
+        /* Music widget */
+        .music-widget {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            z-index: 1000;
+            background: rgba(0,0,0,0.85);
+            border-radius: 10px;
+            padding: 0.5rem;
+            border: 1px solid var(--accent);
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.3rem;
+            max-width: 250px;
+        }
+        .music-widget.active {
+            display: flex;
+        }
+        .music-widget button.close-btn {
+            font-size: 0.8rem;
+            padding: 0.2rem 0.8rem;
+            background: #333;
+            color: #fff;
+            border: 1px solid #fff;
+        }
+        .music-widget audio {
+            width: 100%;
+            margin-top: 0.2rem;
+        }
+
+        /* Rickroll overlay (SoundCloud) */
+        .rickroll-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.95);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            z-index: 9999;
+        }
+        .rickroll-overlay.active {
+            display: flex;
+        }
+
+        /* Matrix canvas */
+        #matrixCanvas {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: black;
+            z-index: 9998;
+        }
+    </style>
+</head>
+<body id="body">
+    <!-- Matrix canvas for self-destruct -->
+    <canvas id="matrixCanvas"></canvas>
+
+    <div class="container" id="main-container">
+        <h1>Hey hey people</h1>
+        <p class="subtitle">Amature Writter here. You're now in the extended unhinged zone.</p>
+
+        <marquee behavior="alternate" scrollamount="5">⚠️ These ideas are highly radioactive. Reader discretion is advised. ⚠️</marquee>
+
+        <div style="text-align: center;">
+            <span class="unwritten-counter" id="counter">☠️ 0</span>
+        </div>
+        <p style="text-align: center; margin: 0.2rem;">Ideas that will <strong>never</strong> be written (click anywhere to add)</p>
+
+        <div class="buttons">
+            <button id="chaosBtn">🔥 Increase Chaos</button>
+            <button id="panicBtn">🚨 Self-Destruct</button>
+            <button id="resetBtn">🧹 Reset Sanity</button>
+        </div>
+
+        <!-- Fic idea cards remain the same -->
+        <div class="fic-card">
+            <h2>Blue Archive <small>(title pending)</small></h2>
+            <details>
+                <summary>▶ Expand the darkness</summary>
+                <p>What happens if Hoshino never joins Abydos? What if Yume, in her second year, finds <em>someone</em>—a name so heavy and fatalistic it comes with its own headache? I'm just asking questions, your honor. <span class="hover-spoiler">The answer involves even more sand.</span></p>
+            </details>
+        </div>
+
+        <div class="fic-card">
+            <h2>DMC × Honkai Impact 3rd <small>(title pending)</small></h2>
+            <details>
+                <summary>▶ Why motorcycles > portals</summary>
+                <p>Dante appears... somewhere snowy. Snow on his boots, snow in his jacket, and zero patience for Vergil's portal nonsense. This is why he prefers a motorcycle—at least he knows where he's going. <span class="hover-spoiler">The pizza survives. Barely.</span></p>
+            </details>
+        </div>
+
+        <div class="fic-card">
+            <h2>Punishing Gray Raven <small>(title pending)</small></h2>
+            <details>
+                <summary>▶ Old. Tired. Still standing.</summary>
+                <p>An old Construct from before the early wars. Last of her generation. Still fighting. Still burying the forgotten. Someone get this woman a vacation. <span class="hover-spoiler">She won't take it. She's allergic to peace.</span></p>
+            </details>
+        </div>
+
+        <div class="fic-card">
+            <h2>GFL <small>(title pending)</small></h2>
+            <details>
+                <summary>▶ Not the dog you expected</summary>
+                <p>What if Lunasia actually revived... sort of. Not a Nyto, not Elisa, not M4A1. Just a bitter doll of a sister who woke up while everyone expected a hyperactive dog. Thus was born M4 SOPMOD II. Surprise. <span class="hover-spoiler">She bites. Emotionally.</span></p>
+            </details>
+        </div>
+
+        <div class="fic-card">
+            <h2>Arknights × Persona 3 — <em>A Meal for Every Mile</em></h2>
+            <details>
+                <summary>▶ The Blue-Haired Black Hole</summary>
+                <p>Minato is un-sealed into a world that is not his own. Rock cancer, cataclysmic storms, animal people—he's taking it remarkably well, all things considered. He is also <strong>very hungry</strong>. So begins the legend of the Blue-Haired Black Hole. Hide your food. Don't question where it goes. <span class="hover-spoiler">Even the seaborn are afraid.</span></p>
+            </details>
+        </div>
+
+        <div class="fic-card">
+            <h2>Arknights × Metal Gear Solid <small>(title pending)</small></h2>
+            <details>
+                <summary>▶ Preservation vs. Protection</summary>
+                <p>Oracle gets replaced by a legend. Naked Snake heads security. Priestess wants to build an Ark to save everything (especially him). Snake would rather fight to the last breath and accept the end. Originium is a cage; she calls it preservation, he calls it protection. They love each other. They hate each other. This is fine. <span class="hover-spoiler">CQC is involved. Probably.</span></p>
+            </details>
+        </div>
+
+        <div class="fic-card">
+            <h2>Hyperdimension Neptunia <small>(title pending)</small></h2>
+            <details>
+                <summary>▶ Making it darker (a threat)</summary>
+                <p>Remember the original HDN1? I do. It was dark. I think I can make it <strong>darker</strong>. This is a threat. <span class="hover-spoiler">No, seriously, I have a 20-page document.</span></p>
+            </details>
+        </div>
+
+        <div class="fic-card">
+            <h2>Kantai Collection <small>(title pending)</small></h2>
+            <details>
+                <summary>▶ Seagulls are the true enemy</summary>
+                <p>Plane crash survivor wakes up on an island as a blind Abyssal Princess. His—<em>her</em>—new priorities: figure out how to see again, defeat her archnemesis the seagulls, identify the cursed whale making noises near the beach, and find a way home so she can hit whoever gave her life advice. In that order. <span class="hover-spoiler">The whale turns out to be plot relevant.</span></p>
+            </details>
+        </div>
+
+        <div class="fic-card">
+            <h2>Nier Automata <small>(title pending)</small></h2>
+            <details>
+                <summary>▶ Blame allocation in progress</summary>
+                <p>He predicted the Project would fail. Replicant self-awareness, Gestalt relapse—he wrote the reports. They didn't listen. Then the AI meant to safeguard it all murdered the project from within. The AI is long gone now. So where does he put the blame? Does he even need to? Inquiries ongoing. <span class="hover-spoiler">Spoiler: he blames himself anyway.</span></p>
+            </details>
+        </div>
+
+        <div class="fic-card">
+            <h2>God Eater — <em>How to Build a Homestead Next to My Neighbor Aragami</em></h2>
+            <details>
+                <summary>▶ Paperwork is scarier than monsters</summary>
+                <p>Waking up somewhere unfamiliar is scary. Waking up face-to-face with an Aragami is worse. When it just... nudges her instead of eating her, that's a sign. A weird sign, but a sign. She finally reaches a port, realizes she needs ID and paperwork, and quietly goes back to the Crimson Ashland. The Aragami is better company, and she doesn't have to file reports. Now she just needs to stop the storm from murdering her plants. <span class="hover-spoiler">The Aragami helps. Kind of.</span></p>
+            </details>
+        </div>
+
+        <footer>
+            <p>Back to the slightly more sane <a href="https://archiveofourown.org/users/Rance_Plain" target="_blank">AO3 profile</a> | Hosted on GitHub Pages because AO3 has character limits, the cowards.</p>
+            <p>Cheat codes: type <strong>disco</strong>, <strong>mgs3</strong>, <strong>gfl</strong>, <strong>skyrim</strong>, <strong>rickroll</strong>, or <strong>sseth</strong> anywhere on this page.</p>
+        </footer>
+    </div>
+
+    <!-- Music widget container -->
+    <div class="music-widget" id="musicWidget">
+        <div id="playerContent"></div>
+        <button class="close-btn" id="closeMusic">✖ Close</button>
+    </div>
+
+    <!-- Rickroll overlay (SoundCloud) -->
+    <div class="rickroll-overlay" id="rickrollOverlay">
+        <div style="text-align:center;color:white;">
+            <h2>🎵 Never Gonna Give You Up 🎵</h2>
+            <iframe id="rickrollFrame" width="300" height="120" allow="autoplay" frameborder="no" src="about:blank"></iframe>
+            <p style="color:#aaa;">Quality locked to SoundCloud. You can't change it. Refresh to escape.</p>
+        </div>
+    </div>
+
+    <script>
+        // ========== COUNTER ==========
+        let unwrittenCount = parseInt(localStorage.getItem('unwrittenCount')) || 0;
+        const counterSpan = document.getElementById('counter');
+        counterSpan.textContent = `☠️ ${unwrittenCount}`;
+
+        document.body.addEventListener('click', (e) => {
+            if (e.target.tagName === 'BUTTON' || e.target.tagName === 'SUMMARY') return;
+            unwrittenCount++;
+            localStorage.setItem('unwrittenCount', unwrittenCount);
+            counterSpan.textContent = `☠️ ${unwrittenCount}`;
+        });
+
+        // ========== BUTTONS ==========
+        document.getElementById('chaosBtn').addEventListener('click', () => {
+            document.body.classList.toggle('disco');
+            document.getElementById('chaosBtn').textContent = document.body.classList.contains('disco') ? '🔥 TOO MUCH CHAOS (undo)' : '🔥 Increase Chaos';
+        });
+
+        // Matrix effect for self-destruct
+        const matrixCanvas = document.getElementById('matrixCanvas');
+        const ctx = matrixCanvas.getContext('2d');
+        let matrixInterval = null;
+
+        document.getElementById('panicBtn').addEventListener('click', () => {
+            // Activate matrix canvas
+            matrixCanvas.style.display = 'block';
+            matrixCanvas.width = window.innerWidth;
+            matrixCanvas.height = window.innerHeight;
+
+            const columns = Math.floor(matrixCanvas.width / 20);
+            const drops = [];
+            for (let i = 0; i < columns; i++) {
+                drops[i] = Math.floor(Math.random() * matrixCanvas.height / 20);
+            }
+
+            function drawMatrix() {
+                ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
+                ctx.fillRect(0, 0, matrixCanvas.width, matrixCanvas.height);
+                ctx.fillStyle = '#0f0';
+                ctx.font = '20px monospace';
+                for (let i = 0; i < drops.length; i++) {
+                    const text = Math.random() > 0.5 ? '1' : '0';
+                    ctx.fillText(text, i * 20, drops[i] * 20);
+                    if (drops[i] * 20 > matrixCanvas.height && Math.random() > 0.975) {
+                        drops[i] = 0;
+                    }
+                    drops[i]++;
+                }
+            }
+
+            matrixInterval = setInterval(drawMatrix, 50);
+
+            // Auto-hide after 4 seconds
+            setTimeout(() => {
+                clearInterval(matrixInterval);
+                matrixCanvas.style.display = 'none';
+            }, 4000);
+        });
+
+        document.getElementById('resetBtn').addEventListener('click', () => {
+            document.body.className = '';
+            document.getElementById('chaosBtn').textContent = '🔥 Increase Chaos';
+            unwrittenCount = 0;
+            localStorage.setItem('unwrittenCount', unwrittenCount);
+            counterSpan.textContent = `☠️ 0`;
+            document.querySelectorAll('details').forEach(d => d.open = false);
+            hideMusicWidget();
+            document.getElementById('rickrollOverlay').classList.remove('active');
+            // Also clear matrix canvas if visible
+            clearInterval(matrixInterval);
+            matrixCanvas.style.display = 'none';
+        });
+
+        // ========== KEYBOARD BUFFER ==========
+        let buffer = '';
+        const secretWords = ['disco', 'mgs3', 'gfl', 'skyrim', 'rickroll', 'sseth'];
+        let bufferTimeout;
+
+        document.addEventListener('keydown', (e) => {
+            if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+            const key = e.key.toLowerCase();
+            if (key.length === 1) buffer += key;
+            else if (key === 'backspace') buffer = buffer.slice(0, -1);
+
+            clearTimeout(bufferTimeout);
+            bufferTimeout = setTimeout(() => { buffer = ''; }, 1500);
+
+            for (let word of secretWords) {
+                if (buffer.endsWith(word)) {
+                    triggerMode(word);
+                    buffer = '';
+                    break;
+                }
+            }
+        });
+
+        // Konami code for disco
+        const konamiCode = ['ArrowUp','ArrowUp','ArrowDown','ArrowDown','ArrowLeft','ArrowRight','ArrowLeft','ArrowRight','KeyB','KeyA'];
+        let konamiIndex = 0;
+        document.addEventListener('keydown', (e) => {
+            if (e.code === konamiCode[konamiIndex]) {
+                konamiIndex++;
+                if (konamiIndex === konamiCode.length) {
+                    triggerMode('disco');
+                    konamiIndex = 0;
+                }
+            } else {
+                konamiIndex = 0;
+            }
+        });
+
+        // ========== MODE TRIGGER ==========
+        function triggerMode(mode) {
+            document.body.classList.remove('disco', 'mgs3', 'gfl', 'skyrim', 'rickroll');
+            hideMusicWidget();
+            document.getElementById('rickrollOverlay').classList.remove('active');
+
+            switch(mode) {
+                case 'disco':
+                    document.body.classList.add('disco');
+                    startMusicSoundcloud('https://soundcloud.com/darude/sandstorm-radio-edit-2', 'Darude – Sandstorm');
+                    break;
+                case 'mgs3':
+                    document.body.classList.add('mgs3');
+                    startMusicAudio('https://archive.org/download/mgs3-complete-soundtrack/Disc%201/02.%20CQC%20~Snake%20Eater%20Main%20Titles~.flac', 'MGS3 Main Title');
+                    break;
+                case 'gfl':
+                    document.body.classList.add('gfl');
+                    startMusicSoundcloud('https://soundcloud.com/chop-shop-65686091/cafe-de-springfield', 'Café de Springfield');
+                    break;
+                case 'skyrim':
+                    document.body.classList.add('skyrim');
+                    // No music, just a snarky message
+                    const skyrimMsg = document.createElement('div');
+                    skyrimMsg.textContent = 'When is Elder Scroll 6, Todd?';
+                    skyrimMsg.style.cssText = 'position:fixed;top:30%;left:50%;transform:translate(-50%, -50%);font-size:3rem;color:white;text-shadow:0 0 20px black;z-index:1100;background:rgba(0,0,0,0.7);padding:1rem 2rem;border-radius:10px;';
+                    document.body.appendChild(skyrimMsg);
+                    setTimeout(() => skyrimMsg.remove(), 5000);
+                    break;
+                case 'rickroll':
+                    startRickroll();
+                    break;
+                case 'sseth':
+                    window.open('https://www.youtube.com/watch?v=MlKtGVVfdc4', '_blank');
+                    const toast = document.createElement('div');
+                    toast.textContent = '📺 Enjoy your SsethTzeentach video. You earned it.';
+                    toast.style.cssText = 'position:fixed;bottom:20px;right:20px;background:#000;color:#ff5e5e;padding:1rem;border-radius:8px;border:1px solid #ff5e5e;z-index:1000;';
+                    document.body.appendChild(toast);
+                    setTimeout(() => toast.remove(), 3000);
+                    break;
+            }
+        }
+
+        // ========== MUSIC HELPERS ==========
+        const widget = document.getElementById('musicWidget');
+        const playerContent = document.getElementById('playerContent');
+        document.getElementById('closeMusic').addEventListener('click', hideMusicWidget);
+
+        function hideMusicWidget() {
+            widget.classList.remove('active');
+            playerContent.innerHTML = '';
+        }
+
+        function startMusicSoundcloud(trackUrl, label) {
+            hideMusicWidget();
+            const embedUrl = `https://w.soundcloud.com/player/?url=${encodeURIComponent(trackUrl)}&auto_play=true&hide_related=true&show_comments=false&show_user=false&show_reposts=false&show_teaser=false&visual=false`;
+            playerContent.innerHTML = `<iframe width="100%" height="80" scrolling="no" frameborder="no" allow="autoplay" src="${embedUrl}"></iframe>`;
+            widget.classList.add('active');
+        }
+
+        function startMusicAudio(audioSrc, label) {
+            hideMusicWidget();
+            playerContent.innerHTML = `<p style="color:white;margin:0;">${label}</p><audio controls autoplay loop src="${audioSrc}" style="width:200px;"></audio>`;
+            widget.classList.add('active');
+            const audio = playerContent.querySelector('audio');
+            if (audio) {
+                audio.play().catch(() => {});
+            }
+        }
+
+        function startRickroll() {
+            const overlay = document.getElementById('rickrollOverlay');
+            const frame = document.getElementById('rickrollFrame');
+            frame.src = `https://w.soundcloud.com/player/?url=${encodeURIComponent('https://soundcloud.com/rick-astley-official/never-gonna-give-you-up')}&auto_play=true&hide_related=true&show_comments=false&show_user=false&show_reposts=false&show_teaser=false`;
+            overlay.classList.add('active');
+        }
+
+        // ========== RANDOM TOAST ==========
+        window.addEventListener('load', () => {
+            const messages = [
+                "Why are you like this?",
+                "You could be writing right now. Instead you're here.",
+                "Remember: caffeine is a legitimate writing tool.",
+                "This page was made at 3 AM. It shows.",
+                "Your ideas are weird. I respect that."
+            ];
+            const randomMsg = messages[Math.floor(Math.random() * messages.length)];
+            const toast = document.createElement('div');
+            toast.textContent = `💬 "${randomMsg}"`;
+            toast.style.cssText = 'position:fixed;bottom:20px;right:20px;background:#000;color:#0f0;padding:1rem;border-radius:8px;border:1px solid #0f0;z-index:1000;box-shadow:0 0 15px rgba(0,255,0,0.5);';
+            document.body.appendChild(toast);
+            setTimeout(() => toast.remove(), 5000);
+        });
+    </script>
+</body>
+</html>
